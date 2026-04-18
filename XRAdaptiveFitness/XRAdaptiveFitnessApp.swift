@@ -1,18 +1,18 @@
-//
-//  XRAdaptiveFitnessApp.swift
-//  XRAdaptiveFitness
-//
-//  Created by iguest on 4/18/26.
-//
-
 import SwiftUI
 
 @main
-struct XRAdaptiveFitnessApp: App {
+struct XRFitnessMVPApp: App {
+    @StateObject private var model = SpeedModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(model)
         }
-        .windowStyle(.volumetric)
+
+        ImmersiveSpace(id: "FitnessSpace") {
+            ImmersiveView(model: model)
+        }
+        .immersionStyle(selection: .constant(.mixed), in: .mixed)
     }
 }
